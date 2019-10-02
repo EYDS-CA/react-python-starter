@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = [
   {
@@ -24,6 +25,7 @@ module.exports = [
       filename: 'bundle.js',
     },
     plugins: [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Basic React App',
         template: './src/index.html',
@@ -59,6 +61,7 @@ module.exports = [
       filename: 'bundle.js',
     },
     plugins: [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         // TODO: Add cache-buster (if needed)
         title: 'Basic React App',
