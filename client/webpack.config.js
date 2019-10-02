@@ -15,25 +15,25 @@ module.exports = [
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"]
-        }
-      ]
+          use: ["babel-loader"],
+        },
+      ],
     },
     resolve: {
-      extensions: ["*", ".js", ".jsx"]
+      extensions: ["*", ".js", ".jsx"],
     },
     output: {
-      path: __dirname + "/dist",
+      path: `${__dirname}/dist`,
       publicPath: "./",
-      filename: "bundle.js"
+      filename: "bundle.js",
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: "Basic React App",
-        template: "./src/index.html"
+        template: "./src/index.html",
       }),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
       contentBase: "./dist",
@@ -41,8 +41,8 @@ module.exports = [
       historyApiFallback: true,
       writeToDisk: true,
       host: HOST,
-      port: PORT
-    }
+      port: PORT,
+    },
   },
   {
     name: "prod",
@@ -53,25 +53,25 @@ module.exports = [
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"]
-        }
-      ]
+          use: ["babel-loader"],
+        },
+      ],
     },
     resolve: {
-      extensions: ["*", ".js", ".jsx"]
+      extensions: ["*", ".js", ".jsx"],
     },
     output: {
-      path: __dirname + "/dist",
+      path: `${__dirname}/dist`,
       publicPath: "./",
-      filename: "bundle.js"
+      filename: "bundle.js",
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         // TODO: Add cache-buster (if needed)
         title: "Basic React App",
-        template: "./src/index.html"
-      })
-    ]
-  }
+        template: "./src/index.html",
+      }),
+    ],
+  },
 ];

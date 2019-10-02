@@ -1,0 +1,18 @@
+{
+  "name": "react-python-starter",
+  "version": "1.0.0",
+  "description": "Basic react+python app to be used as a starting point",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FreshworksStudio/react-python-starter.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FreshworksStudio/react-python-starter/issues"
+  },
+  "homepage": "https://github.com/FreshworksStudio/react-python-starter#readme",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
