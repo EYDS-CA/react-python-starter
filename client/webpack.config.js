@@ -1,3 +1,4 @@
+const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -21,9 +22,12 @@ module.exports = [
     },
     resolve: {
       extensions: ["*", ".js", ".jsx"],
+      alias: {
+        "@": path.join(__dirname, "src"),
+      },
     },
     output: {
-      path: `${__dirname}/dist`,
+      path: path.join(__dirname, "dist"),
       publicPath: "./",
       filename: "bundle.js",
     },
@@ -59,9 +63,12 @@ module.exports = [
     },
     resolve: {
       extensions: ["*", ".js", ".jsx"],
+      alias: {
+        "@": path.join(__dirname, "src"),
+      },
     },
     output: {
-      path: `${__dirname}/dist`,
+      path: path.join(__dirname, "dist"),
       publicPath: "./",
       filename: "bundle.js",
     },
