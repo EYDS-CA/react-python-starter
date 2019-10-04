@@ -6,8 +6,8 @@ services:
     restart: always
     container_name: client
     build:
-      context: client/.docker
-      dockerfile: Dockerfile.dev
+      context: client
+      dockerfile: .docker/Dockerfile.dev
     volumes:
       - ./client/src/:/opt/client/src/
       - "/app/node_modules"
