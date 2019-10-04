@@ -10,6 +10,8 @@ jobs:
         run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build the Docker image
+        env:
+          GITHUB_REF: $GITHUB_REF
         run: docker build . --file Dockerfile --tag freshworksstudio/react-python-starter:$GITHUB_REF
 
       - name: Push to docker hub
@@ -21,4 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run tests inside docker container
+        env:
+          GITHUB_REF: $GITHUB_REF
         run: docker run freshworksstudio/react-python-starter:$GITHUB_REF "npm run test"
