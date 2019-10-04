@@ -19,3 +19,46 @@ services:
 networks:
   default:
     driver: "bridge"
+
+# version: "3.3"
+
+# services:
+  db:
+    image: EXAMPLE-db-img
+    container_name: EXAMPLE-db
+    build:
+      context: ./services/app_api/main/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - local-network
+
+  api:
+    image: EXAMPLE-api-img
+    container_name: EXAMPLE-api
+    build:
+      context: ./services/app_api
+      dockerfile: Dockerfile
+    volumes:
+      - "./services/app_api:/usr/app"
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=main.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/db_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/db_test
+    depends_on:
+      - db
+    networks:
+      - local-network
+  
+networks:
+  local-network:
+    driver: bridge
+volumes:
+  www:
