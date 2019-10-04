@@ -1,4 +1,4 @@
-name: Node Test
+name: Run Unit Tests
 on: [pull_request]
 
 jobs:
@@ -6,11 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 10.x
+      - name: Run Client Unit Tests
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
       - name: npm install and test
         run: |
+          cd client
           npm ci
           npm test
