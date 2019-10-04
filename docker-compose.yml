@@ -2,12 +2,15 @@ version: "3"
 
 services:
   ####################### Client Definition #######################
-  frontend:
+  client:
     restart: always
     container_name: client
     build:
       context: client
-      dockerfile: .docker/Dockerfile.dev
+    command: ["npm", "run", "start"]
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
     volumes:
       - ./client/src/:/opt/client/src/
       - "/app/node_modules"
