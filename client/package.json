@@ -7,8 +7,8 @@
     "build": "webpack --config-name=prod",
     "format": "prettier --config .prettierrc.json --write './**/*.js'",
     "lint": "eslint .",
-    "start": "webpack-dev-server --config-name=dev",
-    "serve": "pm2 serve dist/ 3000 --spa --no-daemon --name client",
+    "serve": "webpack-dev-server --config-name=dev",
+    "start": "pm2 serve dist/ 3000 --spa --no-daemon --name client",
     "test": "jest --env=jsdom",
     "test:update": "jest --env=jsdom --updateSnapshot"
   },
