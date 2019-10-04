@@ -1,0 +1,30 @@
+FROM node:10-alpine as build
+
+# Create working directory
+RUN mkdir /opt/client
+WORKDIR /opt/client
+
+# Install app dependencies
+COPY package.json package-lock.json ./
+RUN npm set progress=false && npm ci
+
+# Add node_module binaries on PATH
+ENV PATH /opt/client/node_modules/.bin:$PATH
+
+# Copy over source code
+COPY . .
+
+# Build the source
+RUN npm run build
+
+# Copy over build assets to a lightweight nginx container
+FROM nginx:alpine
+COPY --from=build /opt/client/dist /usr/share/nginx/html
+
+# Replace default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+COPY .docker/nginx.conf /etc/nginx/conf.d
+
+# Serve the assets
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
