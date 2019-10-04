@@ -15,14 +15,7 @@ services:
     networks:
       - default
 
-####################### Networks Definition #######################
-networks:
-  default:
-    driver: "bridge"
-
-# version: "3.3"
-
-# services:
+  ####################### Database and API Definition #######################
   db:
     image: EXAMPLE-db-img
     container_name: EXAMPLE-db
@@ -56,9 +49,13 @@ networks:
       - db
     networks:
       - local-network
-  
+
+####################### Networks Definition #######################
 networks:
+  default:
+    driver: "bridge"
   local-network:
     driver: bridge
+
 volumes:
   www:
