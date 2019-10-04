@@ -17,8 +17,8 @@ services:
 
   ####################### Database and API Definition #######################
   db:
-    image: EXAMPLE-db-img
-    container_name: EXAMPLE-db
+    image: example-db-img
+    container_name: example-db
     build:
       context: ./services/app_api/main/db
       dockerfile: Dockerfile
@@ -31,8 +31,8 @@ services:
       - local-network
 
   api:
-    image: EXAMPLE-api-img
-    container_name: EXAMPLE-api
+    image: example-api-img
+    container_name: example-api
     build:
       context: ./services/app_api
       dockerfile: Dockerfile
