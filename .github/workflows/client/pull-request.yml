@@ -1,0 +1,24 @@
+name: Run client checks
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Log into Docker hub
+        run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag freshworksstudio/react-python-starter:${{ GITHUB_REF }}
+
+      - name: Push to docker hub
+        run: docker push freshworksstudio/react-python-starter:${{ GITHUB_REF }}
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run tests inside docker container
+        run: docker run freshworksstudio/react-python-starter:${{ GITHUB_REF }} "npm run test"
