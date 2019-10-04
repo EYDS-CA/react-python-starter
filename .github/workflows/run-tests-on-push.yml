@@ -2,16 +2,16 @@ name: Run Unit Tests
 on: [pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Checkout code and switch to client directory
-        run: cd client
+      - name: Checkout code
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Install packages and run npm test
+      - name: Install packages and run client tests
         run: |
+          cd client
           npm ci
           npm test
