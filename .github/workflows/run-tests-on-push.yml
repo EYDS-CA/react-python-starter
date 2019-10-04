@@ -6,12 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Run Client Unit Tests
+      - name: Checkout code and switch to client directory
+        run: cd client
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: npm install and test
+      - name: Install packages and run npm test
         run: |
-          cd client
           npm ci
           npm test
