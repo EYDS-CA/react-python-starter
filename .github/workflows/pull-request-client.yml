@@ -10,10 +10,10 @@ jobs:
         run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build client --file client/Dockerfile --tag freshworksstudio/react-python-starter:"${GITHUB_SHA}"
+        run: docker build client --file client/Dockerfile --tag ${{ secrets.DOCKER_HUB_CLIENT_REPO }}:"${GITHUB_SHA}"
 
       - name: Push to docker hub
-        run: docker push freshworksstudio/react-python-starter:"${GITHUB_SHA}"
+        run: docker push ${{ secrets.DOCKER_HUB_CLIENT_REPO }}:"${GITHUB_SHA}"
 
   test:
     runs-on: ubuntu-latest
@@ -21,4 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run tests inside docker container
-        run: docker run freshworksstudio/react-python-starter:"${GITHUB_SHA}" "npm" "test"
+        run: docker run ${{ secrets.DOCKER_HUB_CLIENT_REPO }}:"${GITHUB_SHA}" "npm" "test"
