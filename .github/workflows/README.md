@@ -4,11 +4,23 @@ This application uses [Github Actions](https://github.com/features/actions) to r
 
 ## Requirements
 
+### Docker Hub
+
+1. Create a registry for storing client images. (This will be `DOCKER_HUB_CLIENT_REPO` in the GITHUB step below)
+
+### AWS
+
+Create an EC2 instance on AWS with docker installed to run the application containers on. Note the private key and the public IP address needed to SSH into the instance. (This will be `AWS_EC2_SSH_KEY` and `AWS_INSTANCE_IP_ADDRESS` in the GITHUB step below)
+
+### GITHUB
+
 You need the following [Secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) defined in your Github Repo for the deployment to run as expected.
 
 `DOCKER_HUB_CLIENT_REPO` : Name of the container registry repository for the client to store/fetch images from.
 `DOCKER_HUB_PASSWORD` : Username for authenticating against the container registry.
 `DOCKER_HUB_USERNAME` : Password for authenticating against the container registry
+`AWS_EC2_SSH_KEY` : Private key for SSH-ing into the ec2 instance.
+`AWS_INSTANCE_IP_ADDRESS` : Public IP address of the ec2 instance.
 
 ## Workflows
 
