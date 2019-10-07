@@ -12,7 +12,7 @@ class ExampleTable(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'name': self.string_field,
+            'string_field': self.string_field,
         }
 
 # ADD MODELS AS NEEDED, SEISM PROJECT HAS A USER MODEL DEFINED THAT MAY BE USEFULL
