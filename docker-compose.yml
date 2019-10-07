@@ -2,7 +2,7 @@ version: "3"
 
 services:
   ####################### Client Definition #######################
-  frontend:
+  client:
     restart: always
     container_name: client
     build:
@@ -12,50 +12,71 @@ services:
       - "/app/node_modules"
     ports:
       - 3000:3000
+    depends_on:
+      - server
     networks:
       - default
 
-  ####################### Database and API Definition #######################
-  db:
-    image: example-db-img
-    container_name: example-db
+  ####################### Database Definition #######################
+  database:
+    container_name: database
     build:
-      context: ./server/main/db
-      dockerfile: Dockerfile
+      context: database
     ports:
       - 5435:5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    networks:
-      - local-network
-
-  api:
-    image: example-api-img
-    container_name: example-api
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=sample_db
     volumes:
-      - "./server:/usr/app"
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - default
+
+  ####################### Server Definition #######################
+  server:
+    container_name: server
+    build:
+      context: server
+    volumes:
+      - "./server:/opt/server/"
     ports:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
-      - APP_SETTINGS=main.config.DevelopmentConfig
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/db_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/db_test
+      - APP_SETTINGS=app.config.DevelopmentConfig
+      - DATABASE_URL=postgres://admin:password@database:5432/sample_db
+      - DATABASE_TEST_URL=postgres://admin:password@database:5432/sample_db_test
     depends_on:
-      - db
+      - server-migrate
     networks:
-      - local-network
+      - default
+
+  ####### Server Database Migration Definition ###########
+
+  server-migrate:
+    restart: on-failure
+    container_name: server-migrate
+    build:
+      context: server
+    command: python manage.py create-db
+    volumes:
+      - "./server:/opt/server/"
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=app.config.DevelopmentConfig
+      - DATABASE_URL=postgres://admin:password@database:5432/sample_db
+      - DATABASE_TEST_URL=postgres://admin:password@database:5432/sample_db_test
+    depends_on:
+      - database
+    networks:
+      - default
 
 ####################### Networks Definition #######################
 networks:
   default:
-    driver: "bridge"
-  local-network:
     driver: bridge
 
+####################### Volumes Definition #######################
 volumes:
-  www:
+  postgres-data:

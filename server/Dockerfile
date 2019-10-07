@@ -1,26 +1,20 @@
 # Base image
-FROM python:3.6.5-alpine
+FROM python:3.6
 
-# Install dependencies
-RUN apk update && \
-    apk add --virtual build-deps gcc python-dev musl-dev && \
-    apk add postgresql-dev && \
-    apk add netcat-openbsd
+# Update installation utilites and packages
+RUN apt-get update
 
 # Set working directory
-RUN mkdir /usr/app
-WORKDIR /usr/app
+RUN mkdir /opt/server
+WORKDIR /opt/server
 
 # Add and install requirements
-COPY ./requirements.txt /usr/app/requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Add entrypoint.sh
-COPY ./entrypoint.sh /usr/app/entrypoint.sh
-RUN chmod +x /usr/app/entrypoint.sh
-
-# Add app
-COPY . /usr/app
+# Add rest of files
+COPY . .
 
 # Run server
-CMD ["/usr/app/entrypoint.sh"]
+EXPOSE 5000
+CMD python manage.py run -h 0.0.0.0

@@ -1,4 +1,4 @@
-from main import db
+from app import db
 
 
 class ExampleTable(db.Model):
@@ -14,5 +14,3 @@ class ExampleTable(db.Model):
             'id': self.id,
             'string_field': self.string_field,
         }
-
-# ADD MODELS AS NEEDED, SEISM PROJECT HAS A USER MODEL DEFINED THAT MAY BE USEFULL

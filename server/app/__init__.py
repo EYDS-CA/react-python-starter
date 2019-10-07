@@ -22,7 +22,7 @@ def create_app(script_info=None):
     db.init_app(app)
 
     # Register blueprints
-    from main.api.example_resource import example_blueprint
+    from app.api.example_resource import example_blueprint
     app.register_blueprint(example_blueprint)
     # ADD OTHER BLUEPRINTS AS NEW RESOURCES ARE NEEDED
 

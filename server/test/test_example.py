@@ -1,7 +1,7 @@
 import json
 import unittest
-from main import db
-from main.api.models import ExampleTable
+from app import db
+from app.api.models import ExampleTable
 from test.base import BaseTestCase
 
 # Helper function to add a sample string to the example_table
@@ -68,4 +68,4 @@ class TestExampleService(BaseTestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.app()
