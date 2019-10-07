@@ -20,7 +20,7 @@ services:
     image: example-db-img
     container_name: example-db
     build:
-      context: ./services/app_api/main/db
+      context: ./server/main/db
       dockerfile: Dockerfile
     ports:
       - 5435:5432
@@ -34,10 +34,10 @@ services:
     image: example-api-img
     container_name: example-api
     build:
-      context: ./services/app_api
+      context: ./server
       dockerfile: Dockerfile
     volumes:
-      - "./services/app_api:/usr/app"
+      - "./server:/usr/app"
     ports:
       - "5000:5000"
     environment:
