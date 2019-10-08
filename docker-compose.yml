@@ -68,7 +68,7 @@ services:
       - "./server:/opt/server/"
     environment:
       - FLASK_ENV=development
-      - APP_SETTINGS=app.config.DevelopmentConfig
+      - APP_SETTINGS=app.config.Config
       - DATABASE_URL=postgres://admin:password@database:5432/sample_db
       - DATABASE_TEST_URL=postgres://admin:password@database:5432/sample_db_test
     depends_on:

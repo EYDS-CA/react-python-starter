@@ -15,8 +15,7 @@ def create_app(script_info=None):
     CORS(app)
 
     # Get config
-    app_settings = os.getenv('APP_SETTINGS')
-    app.config.from_object(app_settings)
+    app.config.from_object('app.config.Config')
 
     # Set up extensions
     db.init_app(app)

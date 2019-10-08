@@ -6,12 +6,12 @@ from app import create_app
 
 app = create_app()
 
-class TestDevelopmentConfig(TestCase):
+class TestConfig(TestCase):
     def create_app(self):
-        app.config.from_object('app.config.DevelopmentConfig')
+        app.config.from_object('app.config.Config')
         return app
 
-    def test_app_is_development(self):
+    def test_config_works(self):
         self.assertTrue(app.config['SECRET_KEY'] == 'temp')
         self.assertFalse(current_app is None)
         self.assertTrue(
@@ -19,9 +19,9 @@ class TestDevelopmentConfig(TestCase):
             os.environ.get('DATABASE_URL')
         )
 
-class TestTestingConfig(TestCase):
+class TestTestConfig(TestCase):
     def create_app(self):
-        app.config.from_object('app.config.TestingConfig')
+        app.config.from_object('app.config.TestConfig')
         return app
 
     def test_app_is_testing(self):
@@ -32,15 +32,6 @@ class TestTestingConfig(TestCase):
             app.config['SQLALCHEMY_DATABASE_URI'] ==
             os.environ.get('DATABASE_TEST_URL')
         )
-
-class TestProductionConfig(TestCase):
-    def create_app(self):
-        app.config.from_object('app.config.ProductionConfig')
-        return app
-
-    def test_app_is_production(self):
-        self.assertTrue(app.config['SECRET_KEY'] == 'temp')
-        self.assertFalse(app.config['TESTING'])
 
 if __name__ == '__main__':
     unittest.app()

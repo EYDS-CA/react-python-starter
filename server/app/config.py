@@ -1,16 +1,11 @@
 import os
 
-class BaseConfig:
+class Config:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',  'postgres://admin:password@database:5432/sample_db')
     SECRET_KEY = 'temp'
 
-class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-
-class TestingConfig(BaseConfig):
+class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_TEST_URL')
-
-class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_TEST_URL', 'postgres://admin:password@database:5432/sample_db_test')

@@ -11,6 +11,7 @@ dist
 .nvimrc
 *.pyc
 *.ds_store
+.env
 
 # Icon must end with two \r
 Icon
