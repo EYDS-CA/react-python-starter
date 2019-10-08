@@ -14,6 +14,9 @@ ENV PATH /opt/client/node_modules/.bin:$PATH
 # Copy over source code
 COPY . .
 
+# Build the source
+RUN npm run build
+
 # Run the server
 EXPOSE 3000
 CMD [ "npm", "run", "start" ]

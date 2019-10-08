@@ -7,7 +7,8 @@
     "build": "webpack --config-name=prod",
     "format": "prettier --config .prettierrc.json --write './**/*.js'",
     "lint": "eslint .",
-    "start": "webpack-dev-server --config-name=dev",
+    "serve": "webpack-dev-server --config-name=dev",
+    "start": "pm2 serve dist/ 3000 --spa --no-daemon --name client",
     "test": "jest --env=jsdom",
     "test:update": "jest --env=jsdom --updateSnapshot"
   },
@@ -40,6 +41,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "pm2": "^3.5.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.1.2"
