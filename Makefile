@@ -1,7 +1,6 @@
 #!make
 
-rebuild: clean | build
-restart: build | run
+restart: stop | build | run
 
 build:
 	@echo "+\n++ Building images ...\n+"
@@ -12,7 +11,7 @@ run:
 	@docker-compose up -d
 
 stop:
-	@echo "+\n++ Running client and server ...\n+"
+	@echo "+\n++ Stopping client and server ...\n+"
 	@docker-compose down -t 2
 
 db-seed:
@@ -24,7 +23,7 @@ server-test:
 	@docker-compose run server python manage.py test
 
 client-test:
-	@echo "+\n++ Running server unit tests ...\n+"
+	@echo "+\n++ Running client unit tests ...\n+"
 	@docker-compose run client npm test
 
 clean:
