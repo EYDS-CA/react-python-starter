@@ -16,15 +16,6 @@ it is recommended to use WSL (Windows Subsytem for Linux).
 
 To launch the client and server together , run `docker-compose up`
 
-## Run the api and database
-
-sh build.sh
-sh setup_api.sh
-
-## To run the backend tests
-
-docker-compose -f docker-compose.yml run api python manage.py test
-
 ## Container Information
 
 - The client container exposes port 3000 and can be viewed by visiting http://localhost:3000
