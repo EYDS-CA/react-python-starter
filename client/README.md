@@ -17,7 +17,7 @@ And the following development tooling:
 Start a local development build of the project
 
 ```
-$ npm start
+$ npm run serve
 ```
 
 ## Development
