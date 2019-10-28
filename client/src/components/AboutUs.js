@@ -12,21 +12,33 @@ export default class AboutUs extends React.Component {
       .then(response =>
         this.setState({
           response: response.examples[0] && response.examples[0].string_field,
-          isLoading: false,
         })
       )
-      .catch(console.error);
+      .catch(() => {
+        this.setState({
+          response: "Something went wrong. Please try again later.",
+        });
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
+  }
+
+  renderFetchedData() {
+    return this.state.isLoading ? (
+      <p>Loading...</p>
+    ) : (
+      <p>{this.state.response}</p>
+    );
   }
 
   render() {
     return (
       <div>
         <h1>About Us</h1>
-        {this.state.isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <p>{this.state.response}</p>
-        )}
+        {this.renderFetchedData()}
         <Link to="/">Go to Home</Link>
       </div>
     );
