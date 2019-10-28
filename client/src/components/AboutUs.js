@@ -11,7 +11,9 @@ export default class AboutUs extends React.Component {
     Axios.get("/example_endpoint")
       .then(response =>
         this.setState({
-          response: response.examples[0] && response.examples[0].string_field,
+          response: response.examples[0]
+            ? response.examples[0].string_field
+            : "No Response Data",
         })
       )
       .catch(() => {
