@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Axios from "@/apiClient/Axios";
 
 // Example stateful component
-// Example API request
 export default class AboutUs extends React.Component {
   state = { isLoading: true };
 
   componentDidMount() {
+    // Example API request
     Axios.get("/example_endpoint")
       .then(response =>
         this.setState({

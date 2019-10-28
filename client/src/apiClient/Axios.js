@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // TODO: Replace with env variable
   baseURL: "http://localhost:5000/api",
 });
 
