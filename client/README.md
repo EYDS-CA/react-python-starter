@@ -14,14 +14,7 @@ And the following development tooling:
 
 ## Getting Started
 
-This project requires a one-time setup of a `.env` file
-
-```
-$ cp .env-example .env
-```
-
-Once the environment has been set up, you can start a local development build
-of the project
+Start a local development build of the project
 
 ```
 $ npm run serve
