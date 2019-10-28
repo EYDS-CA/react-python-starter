@@ -1,6 +1,18 @@
 import axios from "axios";
 
-export default axios.create({
+const instance = axios.create({
   // TODO: Replace with env variable
   baseURL: "http://localhost:5000/api",
 });
+
+instance.interceptors.response.use(
+  // Automatically unpack the successful response
+  response => response.data,
+  // Automatically log a failed response and then pass it along
+  error => {
+    console.error(error);
+    return Promise.reject(error);
+  }
+);
+
+export default instance;

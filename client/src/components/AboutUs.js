@@ -10,7 +10,10 @@ export default class AboutUs extends React.Component {
   componentDidMount() {
     Axios.get("/example_endpoint")
       .then(response =>
-        this.setState({ response: response.data.examples, isLoading: false })
+        this.setState({
+          response: response.examples[0] && response.examples[0].string_field,
+          isLoading: false,
+        })
       )
       .catch(console.error);
   }
@@ -22,7 +25,7 @@ export default class AboutUs extends React.Component {
         {this.state.isLoading ? (
           <p>Loading...</p>
         ) : (
-          <p>{this.state.response[0].string_field}</p>
+          <p>{this.state.response}</p>
         )}
         <Link to="/">Go to Home</Link>
       </div>
