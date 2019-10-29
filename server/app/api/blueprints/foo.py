@@ -8,22 +8,19 @@ foo_blueprint = Blueprint('foo', __name__)
 
 @foo_blueprint.route('/api/foo', methods=['POST'], strict_slashes=False)
 def post():
-    # Handle invalid input
     post_data = request.get_json()
     if not post_data:
         return jsonify({ 'errors': ['Invalid request.'] }), 400
 
-    # Get request data
     string_field = post_data.get('string_field')
 
-    # Optional check if object already exists in database
+    # Validate request data
     if (len(Foo.query.filter_by(string_field=string_field).all()) > 0):
         response_object = {
             'errors': [f'String "{string_field}" already exists']
         }
         return jsonify(response_object), 400
 
-    # Add to DB
     record = Foo(string_field=string_field)
     db.session.add(record)
     db.session.commit()
@@ -51,15 +48,13 @@ def get(foo_id):
 
 @foo_blueprint.route('/api/foo/<int:foo_id>', methods=['PUT'], strict_slashes=False)
 def put(foo_id):
-    # Handle invalid input
     put_data = request.get_json()
     if not put_data:
         return jsonify({ 'errors': ['Invalid request.'] }), 400
 
-    # Get request data
     new_string_field = put_data.get('string_field')
 
-    # Check that the table has an entry with that id. If not, throw error
+    # Validate request data
     record = Foo.query.filter_by(id=foo_id).first()
     if not record:
         response_object = {
@@ -81,7 +76,7 @@ def put(foo_id):
 
 @foo_blueprint.route('/api/foo/<int:foo_id>', methods=['DELETE'], strict_slashes=False)
 def delete(foo_id):
-    # Check that the table has an entry with that id. If not, throw error
+    # Validate request data
     record = Foo.query.filter_by(id=foo_id).first()
     if not record:
         response_object = {
@@ -89,7 +84,6 @@ def delete(foo_id):
         }
         return jsonify(response_object), 404
 
-    # Detete the record
     db.session.delete(record)
     db.session.commit()
 
