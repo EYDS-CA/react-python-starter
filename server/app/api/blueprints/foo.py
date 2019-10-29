@@ -6,7 +6,7 @@ from app.api.models.foo import Foo
 foo_blueprint = Blueprint('foo', __name__)
 
 
-@foo_blueprint.route('/api/foo', methods=['POST'])
+@foo_blueprint.route('/api/foo', methods=['POST'], strict_slashes=False)
 def post():
 
     response_object = {
@@ -36,7 +36,7 @@ def post():
     return jsonify(foo_row.to_json()), 201
 
 
-@foo_blueprint.route('/api/foo', methods=['GET'])
+@foo_blueprint.route('/api/foo', methods=['GET'], strict_slashes=False)
 def get_all():
     response_object = {
         'records': [foos.to_json() for foos in Foo.query.all()]
@@ -44,7 +44,7 @@ def get_all():
     return jsonify(response_object), 200
 
 
-@foo_blueprint.route('/api/foo/<foo_id>', methods=['GET'])
+@foo_blueprint.route('/api/foo/<int:foo_id>', methods=['GET'], strict_slashes=False)
 def get(foo_id):
     record = Foo.query.filter_by(id=foo_id).first()
     if not record:
@@ -54,7 +54,7 @@ def get(foo_id):
     return jsonify(record.to_json()), 200
 
 
-@foo_blueprint.route('/api/foo/<foo_id>', methods=['PUT'])
+@foo_blueprint.route('/api/foo/<int:foo_id>', methods=['PUT'], strict_slashes=False)
 def put(foo_id):
 
     response_object = {
@@ -89,7 +89,7 @@ def put(foo_id):
     return jsonify(record_to_modify.to_json()), 200
 
 
-@foo_blueprint.route('/api/foo/<foo_id>', methods=['DELETE'])
+@foo_blueprint.route('/api/foo/<int:foo_id>', methods=['DELETE'], strict_slashes=False)
 def delete(foo_id):
 
     response_object = {

@@ -1,18 +1,8 @@
 import json
 import unittest
 from app import db
-from app.api.models.foo import Foo
 from test.base import BaseTestCase
-
-# Helper function to add a sample string to Foo
-
-
-def create_foo_string(foo_string):
-    foo_table_element = Foo(string_field=foo_string)
-    db.session.add(foo_table_element)
-    db.session.commit()
-    return foo_table_element
-
+from test.helpers import create_foo_string
 
 class TestFooService(BaseTestCase):
     def test_get_all_foo(self):
