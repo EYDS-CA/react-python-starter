@@ -14,8 +14,8 @@ def create_foo_string(foo_string):
     return foo_table_element
 
 
-class TestExampleService(BaseTestCase):
-    def test_get_foo(self):
+class TestFooService(BaseTestCase):
+    def test_get_all_foo(self):
         create_foo_string('foo_string_1')
         create_foo_string('foo_string_2')
         create_foo_string('foo_string_3')
@@ -24,6 +24,14 @@ class TestExampleService(BaseTestCase):
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(data['records']), 3)
+
+    def test_get_foo(self):
+        record = create_foo_string('foo_string_1')
+        with self.client:
+            response = self.client.get(f'/api/foo/{record.id}')
+        data = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['id'], record.id)
 
     def test_post_foo(self):
         test_string = 'I am a test string'
@@ -36,28 +44,26 @@ class TestExampleService(BaseTestCase):
                                         )
         self.assertEqual(response.status_code, 201)
         data = json.loads(response.data.decode())
-        self.assertEqual(data['foo']['string_field'], test_string)
+        self.assertEqual(data['string_field'], test_string)
 
     def test_put_foo(self):
         create_foo_string('foo_string_1')
         with self.client:
-            response = self.client.put('/api/foo',
+            response = self.client.put('/api/foo/1',
                                        data=json.dumps({
-                                           'id': 1,
                                            'string_field': 'I am a test string',
                                        }),
                                        content_type='application/json',
                                        )
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data.decode())
-        self.assertEqual(data['foo']['string_field'], 'I am a test string')
+        self.assertEqual(data['string_field'], 'I am a test string')
 
     def test_delete_foo(self):
         create_foo_string('foo_string_1')
         with self.client:
-            response = self.client.delete('/api/foo',
+            response = self.client.delete('/api/foo/1',
                                           data=json.dumps({
-                                              'id': 1,
                                               'string_field': 'I am a test string',
                                           }),
                                           content_type='application/json',

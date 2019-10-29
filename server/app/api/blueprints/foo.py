@@ -33,23 +33,29 @@ def post():
     db.session.add(foo_row)
     db.session.commit()
 
-    # Return success and created object
-    response_object = {
-        'foo': foo_row.to_json()
-    }
-    return jsonify(response_object), 201
+    return jsonify(foo_row.to_json()), 201
 
 
 @foo_blueprint.route('/api/foo', methods=['GET'])
-def get():
+def get_all():
     response_object = {
         'records': [foos.to_json() for foos in Foo.query.all()]
     }
     return jsonify(response_object), 200
 
 
-@foo_blueprint.route('/api/foo', methods=['PUT'])
-def put():
+@foo_blueprint.route('/api/foo/<foo_id>', methods=['GET'])
+def get(foo_id):
+    record = Foo.query.filter_by(id=foo_id).first()
+    if not record:
+        return jsonify({
+            'errors': [f'No record with id={foo_id} found.']
+        })
+    return jsonify(record.to_json()), 200
+
+
+@foo_blueprint.route('/api/foo/<foo_id>', methods=['PUT'])
+def put(foo_id):
 
     response_object = {
         'errors': ['Invalid request.']
@@ -61,7 +67,6 @@ def put():
         return jsonify(response_object), 400
 
     # Get request data
-    foo_id = put_data.get('id')
     new_string_field = put_data.get('string_field')
 
     # Check that the table has an entry with that id. If not, throw error
@@ -81,27 +86,15 @@ def put():
     record_to_modify.string_field = new_string_field
     db.session.commit()
 
-    # Return success and updated object
-    response_object = {
-        'foo': record_to_modify.to_json()
-    }
-    return jsonify(response_object), 200
+    return jsonify(record_to_modify.to_json()), 200
 
 
-@foo_blueprint.route('/api/foo', methods=['DELETE'])
-def delete():
+@foo_blueprint.route('/api/foo/<foo_id>', methods=['DELETE'])
+def delete(foo_id):
 
     response_object = {
         'errors': ['Invalid request.']
     }
-
-    # Handle invalid input
-    delete_data = request.get_json()
-    if not delete_data:
-        return jsonify(response_object), 400
-
-    # Get request data
-    foo_id = delete_data.get('id')
 
     # Check that the table has an entry with that id. If not, throw error
     record_to_delete = Foo.query.filter_by(id=foo_id).first()
@@ -115,6 +108,4 @@ def delete():
     db.session.delete(record_to_delete)
     db.session.commit()
 
-    # Return success
-    response_object = { }
-    return jsonify(response_object), 200
+    return jsonify({}), 200
