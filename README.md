@@ -20,6 +20,8 @@ Please refer to [Makefile](Makefile) for a list of all commands. Some of the mos
 
 `make run` : Launches the application using docker (Builds the images if they haven't been built before)
 
+`make run-server` : Launches the server using docker (Builds the images if they haven't been built before)
+
 `make stop` : Stops any running containers
 
 `make build` : (Re-)Builds container images listed in the docker-compose.

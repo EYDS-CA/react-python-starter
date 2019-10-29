@@ -10,6 +10,10 @@ run:
 	@echo "+\n++ Running client and server ...\n+"
 	@docker-compose up -d
 
+run-server:
+	@echo "+\n++ Running server ...\n+"
+	@docker-compose up -d server
+
 stop:
 	@echo "+\n++ Stopping client and server ...\n+"
 	@docker-compose down -t 2
