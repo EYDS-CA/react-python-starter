@@ -21,8 +21,8 @@ def create_app(script_info=None):
     db.init_app(app)
 
     # Register blueprints
-    from app.api.example_resource import example_blueprint
-    app.register_blueprint(example_blueprint)
+    from app.api.blueprints.foo import foo_blueprint
+    app.register_blueprint(foo_blueprint)
     # ADD OTHER BLUEPRINTS AS NEW RESOURCES ARE NEEDED
 
     # Shell context for flask cli

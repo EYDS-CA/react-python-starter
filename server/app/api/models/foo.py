@@ -1,8 +1,8 @@
 from app import db
 
 
-class ExampleTable(db.Model):
-    __tablename__ = 'example_table'
+class Foo(db.Model):
+    __tablename__ = 'foo'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     string_field = db.Column(db.String(128), nullable=False)
 
