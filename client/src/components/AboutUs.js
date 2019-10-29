@@ -8,11 +8,11 @@ export default class AboutUs extends React.Component {
 
   componentDidMount() {
     // Example API request
-    Axios.get("/example_endpoint")
+    Axios.get("/foo")
       .then(response =>
         this.setState({
-          response: response.examples[0]
-            ? response.examples[0].string_field
+          response: response.records[0]
+            ? response.records[0].string_field
             : "No Response Data",
         })
       )
