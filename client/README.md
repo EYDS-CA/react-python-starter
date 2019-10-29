@@ -10,6 +10,7 @@ And the following development tooling:
 
 - ESLint
 - Prettier formatting
+- SASS support
 - Webpack Dev Server with hot module replacement
 
 ## Getting Started
@@ -38,11 +39,10 @@ The following sample components are provided:
   example of routing to another page/component. It also provides an example of
   conditional rendering based on incoming props. Sample Jest snapshot tests are
   provided for this component.
-- AboutUs: A stateless component used to show the process of routing between
-  pages.
+- AboutUs: A stateful component with an example API request integrated into the
+  component state.
 - NotFound: A stateless component used as the fall-through if no other routes
   are matched.
-- CheckboxWithLabel: A sample stateful component.
 
 ### Linting and Formatting
 
