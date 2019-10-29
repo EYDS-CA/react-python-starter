@@ -18,7 +18,6 @@ def create_db():
     db.create_all()
     db.session.commit()
 
-# When data need to be seeded this is what we should use
 @cli.command()
 def seed_db():
     db.session.add(Foo(string_field='Hello World'))

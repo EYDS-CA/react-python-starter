@@ -8,15 +8,10 @@ foo_blueprint = Blueprint('foo', __name__)
 
 @foo_blueprint.route('/api/foo', methods=['POST'], strict_slashes=False)
 def post():
-
-    response_object = {
-        'errors': ['Invalid request.']
-    }
-
     # Handle invalid input
     post_data = request.get_json()
     if not post_data:
-        return jsonify(response_object), 400
+        return jsonify({ 'errors': ['Invalid request.'] }), 400
 
     # Get request data
     string_field = post_data.get('string_field')
@@ -29,11 +24,11 @@ def post():
         return jsonify(response_object), 400
 
     # Add to DB
-    foo_row = Foo(string_field=string_field)
-    db.session.add(foo_row)
+    record = Foo(string_field=string_field)
+    db.session.add(record)
     db.session.commit()
 
-    return jsonify(foo_row.to_json()), 201
+    return jsonify(record.to_json()), 201
 
 
 @foo_blueprint.route('/api/foo', methods=['GET'], strict_slashes=False)
@@ -50,32 +45,27 @@ def get(foo_id):
     if not record:
         return jsonify({
             'errors': [f'No record with id={foo_id} found.']
-        })
+        }), 404
     return jsonify(record.to_json()), 200
 
 
 @foo_blueprint.route('/api/foo/<int:foo_id>', methods=['PUT'], strict_slashes=False)
 def put(foo_id):
-
-    response_object = {
-        'errors': ['Invalid request.']
-    }
-
     # Handle invalid input
     put_data = request.get_json()
     if not put_data:
-        return jsonify(response_object), 400
+        return jsonify({ 'errors': ['Invalid request.'] }), 400
 
     # Get request data
     new_string_field = put_data.get('string_field')
 
     # Check that the table has an entry with that id. If not, throw error
-    record_to_modify = Foo.query.filter_by(id=foo_id).first()
-    if not record_to_modify:
+    record = Foo.query.filter_by(id=foo_id).first()
+    if not record:
         response_object = {
             'errors': [f'No record with id={foo_id} found.']
         }
-        return jsonify(response_object), 400
+        return jsonify(response_object), 404
 
     if type(new_string_field) is not str:
         response_object = {
@@ -83,29 +73,24 @@ def put(foo_id):
         }
         return jsonify(response_object), 400
 
-    record_to_modify.string_field = new_string_field
+    record.string_field = new_string_field
     db.session.commit()
 
-    return jsonify(record_to_modify.to_json()), 200
+    return jsonify(record.to_json()), 200
 
 
 @foo_blueprint.route('/api/foo/<int:foo_id>', methods=['DELETE'], strict_slashes=False)
 def delete(foo_id):
-
-    response_object = {
-        'errors': ['Invalid request.']
-    }
-
     # Check that the table has an entry with that id. If not, throw error
-    record_to_delete = Foo.query.filter_by(id=foo_id).first()
-    if not record_to_delete:
+    record = Foo.query.filter_by(id=foo_id).first()
+    if not record:
         response_object = {
             'errors': [f'No record with id={foo_id} found.']
         }
-        return jsonify(response_object), 400
+        return jsonify(response_object), 404
 
     # Detete the record
-    db.session.delete(record_to_delete)
+    db.session.delete(record)
     db.session.commit()
 
     return jsonify({}), 200
