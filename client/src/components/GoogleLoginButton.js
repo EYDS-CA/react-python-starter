@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
+// Component for handling Google Sign-in actions.
+// Remove if not using Google Sign-in
 export class GoogleLoginButton extends Component {
-  state = {};
-
   componentDidMount() {
     window.onSignIn = this.onSuccess;
   }

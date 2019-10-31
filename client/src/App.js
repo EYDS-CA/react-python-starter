@@ -19,8 +19,9 @@ const App = !USE_GOOGLE_SIGNIN
       </BrowserRouter>
     )
   : // Stateful component for Google Sign-in support
+    // Remove if not using Google Sign-in
     class App extends Component {
-      state = { isAuthenticated: false };
+      state = { isAuthenticated: false, authComplete: false, idToken: null };
 
       componentDidMount() {
         if (process.env.GOOGLE_SIGNIN_CLIENT === "") {
