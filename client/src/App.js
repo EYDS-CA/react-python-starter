@@ -3,13 +3,13 @@ import { BrowserRouter } from "react-router-dom";
 import { PublicRoutes, PrivateRoutes } from "@/Routes";
 import "@/styles/index.scss";
 
-import GoogleLoginButton from "@/components/GoogleLoginButton.js";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
-// Easily toggle on Google Sign-in
+// Toggle on Google Sign-in
 // NOTE: Hot module replacement causes the button to disappear.
 //       This is not a problem when the app is built "normally."
 //       Refresh the browser to see the button again.
-const USE_GOOGLE_SIGNIN = false;
+const USE_GOOGLE_SIGNIN = true;
 
 const App = !USE_GOOGLE_SIGNIN
   ? // Simple Stateless component

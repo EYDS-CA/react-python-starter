@@ -66,7 +66,7 @@ The following components are included for Google Sign-in support:
 - App: App is always included, but the version for Google Sign-in includes
   application-level state that tracks the user's authentication status.
 - GoogleLoginButton: A class component that handles the sign-in/out actions. It
-  accepts callbacks as props to update the application-level status in App.
+  accepts callbacks as props to update the application-level state in App.
 - Login: A stateless component to be rendered when an unauthenticated user
   attempts to view a private route.
 
@@ -79,8 +79,7 @@ component.
 Public and private routes have been set up to be as simple as possible. By
 leveraging the application state, private routes are conditionally rendered. To
 add more public or private routes, simply add more routes to their respective
-`switch`es in `Routes.js`. New routes are automatically included in
-`BrowserRouter`.
+`Switch`es in `Routes.js`. New routes are automatically included in `App`.
 
 ### Linting and Formatting
 
