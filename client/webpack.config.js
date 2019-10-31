@@ -10,9 +10,11 @@ const PORT = process.env.PORT || 3000;
 const env = dotenv.config().parsed || {};
 
 const API_URL = env.API_URL || "http://localhost:5000/api";
+const GOOGLE_SIGNIN_CLIENT = env.GOOGLE_SIGNIN_CLIENT || "";
 
 const ENVIRONMENT_VARIABLES = {
   "process.env.API_URL": JSON.stringify(API_URL),
+  "process.env.GOOGLE_SIGNIN_CLIENT": JSON.stringify(GOOGLE_SIGNIN_CLIENT),
 };
 
 module.exports = [

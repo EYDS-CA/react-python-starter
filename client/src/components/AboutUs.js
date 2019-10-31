@@ -32,7 +32,7 @@ export default class AboutUs extends React.Component {
     return this.state.isLoading ? (
       <p>Loading...</p>
     ) : (
-      <p>{this.state.response}</p>
+      <p>Data fetched from API: {this.state.response}</p>
     );
   }
 
