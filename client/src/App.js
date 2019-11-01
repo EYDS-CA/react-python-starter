@@ -9,7 +9,7 @@ import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 // NOTE: Hot module replacement causes the button to disappear.
 //       This is not a problem when the app is built "normally."
 //       Refresh the browser to see the button again.
-const USE_GOOGLE_SIGNIN = true;
+const USE_GOOGLE_SIGNIN = false;
 
 const App = !USE_GOOGLE_SIGNIN
   ? // Simple Stateless component
