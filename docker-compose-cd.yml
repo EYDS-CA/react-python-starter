@@ -30,7 +30,7 @@ services:
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-admin}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
-      - POSTGRES_DB=dm_library
+      - POSTGRES_DB=postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -48,8 +48,8 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
-      - DATABASE_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/dm_library
-      - DATABASE_TEST_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/dm_library_test
+      - DATABASE_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/postgres
+      - DATABASE_TEST_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/postgres_test
       - SMTP_USERNAME=${SMTP_USERNAME:-user}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-pass}
       - SMTP_ENABLE=${SMTP_ENABLE:-True}
@@ -71,8 +71,8 @@ services:
       - "./server:/opt/server/"
     environment:
       - FLASK_ENV=development
-      - DATABASE_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/dm_library
-      - DATABASE_TEST_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/dm_library_test
+      - DATABASE_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/postgres
+      - DATABASE_TEST_URL=postgres://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-password}@database:5432/postgres_test
     depends_on:
       - database
     networks:

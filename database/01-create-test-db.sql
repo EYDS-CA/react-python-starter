@@ -1,1 +1,1 @@
-CREATE DATABASE sample_db_test;
+CREATE DATABASE postgres_test;
