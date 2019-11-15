@@ -2,6 +2,8 @@
 
 Basic react+python app to be used as a starting point
 
+Associated [Jira Epic](https://freshworks.atlassian.net/browse/WEB-92)
+
 ## Installation and Usage
 
 This file describes how to run the project and develop against it.
