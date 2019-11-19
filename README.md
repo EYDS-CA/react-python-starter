@@ -10,6 +10,24 @@ This file describes how to run the project and develop against it.
 NOTE: The instructions below haven't been tested on windows. If you are using windows
 it is recommended to use WSL (Windows Subsytem for Linux).
 
+This repo uses [git
+submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Due to this,
+it is recommended that you use the following commands to setup the repo
+locally.
+
+Clone the repo and all of its submodules.
+
+```
+$ git clone --recurse-submodules git@github.com:FreshworksStudio/react-python-starter.git
+```
+
+Update the client submodule to latest `master`.
+```
+$ cd react-python-starter/client
+$ git checkout master
+$ git pull
+```
+
 ## Requirements
 
 - Docker
