@@ -2,24 +2,17 @@ name: Run Unit tests
 on: [pull_request]
 
 jobs:
-  update-submodules:
+  test-client:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: Update submodules
         run: make update-submodules
-
-  test-client:
-    runs-on: ubuntu-latest
-    needs: update-submodules
-    steps:
-      - uses: actions/checkout@v1
       - name: Run unit tests for client
         run: make client-test
 
   test-server:
     runs-on: ubuntu-latest
-    needs: update-submodules
     steps:
       - uses: actions/checkout@v1
       - name: Run unit tests for server
