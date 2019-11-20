@@ -13,14 +13,6 @@ pipeline {
                 }
             }
         }
-        stage('Clone submodule') {
-            dir("./client") {
-                steps {
-                    sh 'git submodule init'
-                    sh 'git submodule update'
-                }
-            }
-        }
         stage('Build images') {
             steps {
                 sh 'docker-compose -f docker-compose-ci.yml build --parallel'

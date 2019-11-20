@@ -34,3 +34,7 @@ clean:
 	@echo "+\n++ Removing containers, images, volumes etc...\n+"
 	@docker-compose rm -f -v -s
 	@docker volume rm -f react-python-starter_postgres-data
+
+update-submodules:
+	@echo "+\n++ Updating submodules ...\n+"
+	@mkdir -p client && cd ./client && git submodule init && git submodule update
