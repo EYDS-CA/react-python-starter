@@ -20,7 +20,7 @@ module.exports = async browser => {
     } else {
       fail();
       errors.push(
-        `Header expected to include "${expected}" but received: "${actual}"`,
+        `Response data expected to include "${expected}" but was: "${actual}"`,
       );
     }
   } catch (e) {

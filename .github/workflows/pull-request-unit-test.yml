@@ -26,9 +26,8 @@ jobs:
         run: make update-submodules
       - name: Start App
         run: make run
-      - name: Give server time to start
-        run: sleep 15
-      - name: Hit server
-        run: curl http://localhost:5000/api/foo
+      - name: Ping server until successful
+        timeout-minutes: 1
+        run: until curl http://localhost:5000/api/foo; do echo "Retrying"; sleep 1; done
       - name: Run e2e tests
         run: npm ci && npm test
