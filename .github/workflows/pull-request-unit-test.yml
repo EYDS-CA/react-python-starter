@@ -17,3 +17,14 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run unit tests for server
         run: make server-test
+
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Update submodules
+        run: make update-submodules
+      - name: Start App
+        run: make run
+      - name: Run e2e tests
+        run: npm test
