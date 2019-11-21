@@ -27,4 +27,4 @@ jobs:
       - name: Start App
         run: make run
       - name: Run e2e tests
-        run: npm test
+        run: npm ci && npm test
