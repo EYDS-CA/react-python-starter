@@ -65,6 +65,7 @@ NOTE: If you're having any unexpected issues, it's best to run `make rebuild` to
 - The database container exposes port 5432 and can be viewed by using pgAdmin.
 
 ## CI/CD
+![](https://github.com/FreshworksStudio/react-python-starter/workflows/Run%20Unit%20Tests/badge.svg)
 
 - The application uses Github Workflows to run CI/CD pipelines. For more information checkout the [Github Actions Readme](.github/workflows/README.md)
 
