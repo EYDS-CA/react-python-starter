@@ -1,4 +1,4 @@
-const { success, fail } = require('./helpers');
+const {success, fail} = require('./helpers');
 
 // Tests that the API is successfully integrated with the UI
 module.exports = async browser => {
@@ -13,11 +13,15 @@ module.exports = async browser => {
       responseDataElement,
     );
     // TODO: Update to reference seed data
-    if (responseData.toLowerCase().includes('no response data')) {
+    const expected = 'no response data';
+    const actual = responseData.toLowerCase();
+    if (actual.includes(expected)) {
       success();
     } else {
       fail();
-      errors.push('API data not visible');
+      errors.push(
+        `Header expected to include "${expected}" but received: "${actual}"`,
+      );
     }
   } catch (e) {
     errors.push(e);
