@@ -12,8 +12,7 @@ module.exports = async browser => {
       element => element.textContent,
       responseDataElement,
     );
-    // TODO: Update to reference seed data
-    const expected = 'no response data';
+    const expected = 'hello world';
     const actual = responseData.toLowerCase();
     if (actual.includes(expected)) {
       success();

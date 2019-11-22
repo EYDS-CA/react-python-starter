@@ -26,6 +26,8 @@ jobs:
         run: make update-submodules
       - name: Start App
         run: make run
+      - name: Seed database
+        run: make db-seed
       - name: Ping server until successful
         timeout-minutes: 1
         run: until curl http://localhost:5000/api/foo; do echo "Retrying"; sleep 1; done
