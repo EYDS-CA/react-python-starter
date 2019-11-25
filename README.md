@@ -10,23 +10,25 @@ This file describes how to run the project and develop against it.
 NOTE: The instructions below haven't been tested on windows. If you are using windows
 it is recommended to use WSL (Windows Subsytem for Linux).
 
+### Starting a New Project
+
 This repo uses [git
-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Due to this,
-it is recommended that you use the following commands to setup the repo
-locally.
+submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). If you will
+be using this repo as a starting-point for a new project, it is recommended
+that you use the following command to setup the repo once you have cloned it.
 
-Clone the repo and all of its submodules.
+This will:
+- Install the client submodule
+- Remove unnecessary files
+- Reinitialize the git history
+
 
 ```
-$ git clone --recurse-submodules git@github.com:FreshworksStudio/react-python-starter.git
+$ make setup
 ```
 
-Update the client submodule to latest `master`.
-```
-$ cd react-python-starter/client
-$ git checkout master
-$ git pull
-```
+**NOTE:** Do not run this command if you would like to contribute to the
+boilerplate. See the Contributing section for more details.
 
 ## Requirements
 
@@ -63,8 +65,31 @@ NOTE: If you're having any unexpected issues, it's best to run `make rebuild` to
 - The database container exposes port 5432 and can be viewed by using pgAdmin.
 
 ## CI/CD
+![](https://github.com/FreshworksStudio/react-python-starter/workflows/Run%20Unit%20Tests/badge.svg)
 
 - The application uses Github Workflows to run CI/CD pipelines. For more information checkout the [Github Actions Readme](.github/workflows/README.md)
+
+## Contributing
+
+If you intended to make changes to this boilerplate, you will want to use one
+of the following workflows.
+
+### Backend/Deployment Changes
+
+If you would like to update any of the Python and/or deployment code, you can
+treat this repo like any other. Simply clone the repo, make a branch for your
+changes, and open a PR for review against the `master` branch.
+
+### Frontend Changes
+
+If you would like to make frontend changes, you should start by making your
+changes to the
+[minimal-react-boilerplate](https://github.com/FreshworksStudio/minimal-react-boilerplate).
+Follow the existing workflow on that repo while making your updates.
+
+Once your changes have been merged to the `master` branch, you can return to
+this repo to update the submodule commit hash to match the one associated with
+the new latest HEAD on the `minimal-react-boilerplate` `master` branch.
 
 ## License
 
