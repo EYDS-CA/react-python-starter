@@ -52,6 +52,11 @@ services:
       - server-migrate
     networks:
       - default
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/foo"]
+      interval: 1s
+      timeout: 10s
+      retries: 30
 
   ####### Server Database Migration Definition ###########
 
