@@ -31,6 +31,23 @@ $ make setup
 **NOTE:** Do not run this command if you would like to contribute to the
 boilerplate. See the Contributing section for more details.
 
+### Using a different FE
+
+The submodule pattern allows you to easily swap out the Minimal React repo for
+a different frontend repo of your choice. So long as it is written to work with
+the `docker-compose` file(s) in this repo, your new frontend will work
+out-of-the-box with the following steps.
+
+1. Update the `url` in the `.gitmodules` file as shown in the git diff below
+   ```
+   - url = https://github.com/FreshworksStudio/minimal-react-boilerplate
+   + url = https://github.com/FreshworksStudio/some-other-frontend
+   ```
+2. Setup your new app for development
+   ```
+   $ make setup
+   ```
+
 ## Requirements
 
 - Docker
