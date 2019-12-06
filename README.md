@@ -31,7 +31,7 @@ $ make setup
 **NOTE:** Do not run this command if you would like to contribute to the
 boilerplate. See the Contributing section for more details.
 
-### Using a different FE
+### Using a Different Frontend
 
 The submodule pattern allows you to easily swap out the Minimal React repo for
 a different frontend repo of your choice. So long as it is written to work with
