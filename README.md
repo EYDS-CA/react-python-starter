@@ -91,6 +91,13 @@ Once your changes have been merged to the `master` branch, you can return to
 this repo to update the submodule commit hash to match the one associated with
 the new latest HEAD on the `minimal-react-boilerplate` `master` branch.
 
+This process has been automated by the following command:
+```
+$ make update-submodules
+```
+
+The new commit hash is now ready to be committed.
+
 ## License
 
 Code released under the [Apache License, Version 2.0](LICENSE).
